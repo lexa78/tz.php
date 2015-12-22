@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 21, 2015 at 10:07 
+-- Generation Time: Dec 22, 2015 at 04:55 
 -- Server version: 5.5.41-log
 -- PHP Version: 5.6.3
 
@@ -56,18 +56,23 @@ CREATE TABLE IF NOT EXISTS `tz_book` (
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   `author_id` int(11) NOT NULL,
+  `after_date` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `author_id` (`author_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `tz_book`
 --
 
-INSERT INTO `tz_book` (`id`, `name`, `preview`, `date`, `created_at`, `updated_at`, `author_id`) VALUES
-(7, 'Нос', 'KwbV-ftud4npmOuvdfaIr9HQ8QBVOtdD.jpg', 1450472400, 1450711641, 1450723399, 3),
-(8, 'Сказка о золотой рыбке', 'WJbiulJGzzVlQ4pXdXJe9MGMbvGXdIEP.jpg', 1450904400, 1450714517, 1450718216, 1),
-(9, 'Война и мир', 'SaiYt-wKJbctyS-jOdKsO3uv9ppWHONw.jpg', 1435352400, 1450714536, 1450719413, 2);
+INSERT INTO `tz_book` (`id`, `name`, `preview`, `date`, `created_at`, `updated_at`, `author_id`, `after_date`) VALUES
+(7, 'Нос', 'KwbV-ftud4npmOuvdfaIr9HQ8QBVOtdD.jpg', 1450645200, 1450711641, 1450790991, 3, NULL),
+(8, 'Сказка о золотой рыбке', 'WJbiulJGzzVlQ4pXdXJe9MGMbvGXdIEP.jpg', 1450645200, 1450714517, 1450791820, 1, NULL),
+(9, 'Война и мир', 'SaiYt-wKJbctyS-jOdKsO3uv9ppWHONw.jpg', 1435352400, 1450714536, 1450719413, 2, NULL),
+(10, 'Сказка о золотой рыбке и старухе и корыте', 'VJ46LgayFjdQI0Csr7fjo0KcDxP7wxgI.JPG', 1449003600, 1450779759, 1450791698, 1, NULL),
+(11, 'Нос, ухо и рот', '_IUTSWR2U_Mfnh9eHiq66LZbHWNYx21k.jpg', 1440018000, 1450788325, 1450788515, 3, NULL),
+(12, 'Мертвые души', 'yqimIfXUMLC2FWkc46p4xXtuRHVwTM2C.jpg', 1450558800, 1450788633, 1450790976, 3, NULL),
+(13, 'Анна Каренина', 'hOIHQTreUg-jW9YZTlZkE5i1JlW5NpYN.jpg', 1446411600, 1450790515, 1450790618, 2, NULL);
 
 -- --------------------------------------------------------
 
