@@ -61,10 +61,13 @@ class Searcher extends Book
             return $dataProvider;
         }
 
+
+
         // adjust the query by adding the filters
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'author.last_name', $this->getAttribute('author.last_name')])
-            ->andFilterWhere(['between', 'date', Book::getIntDate($this->date), Book::getIntDate($this->after_date)]);
+            ->andFilterWhere(['between', 'date', $this->date ? Book::getIntDate($this->date) : $this->date,
+                $this->after_date ? Book::getIntDate($this->after_date) : $this->after_date]);
 
         return $dataProvider;
     }
