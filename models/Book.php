@@ -97,6 +97,7 @@ class Book extends \yii\db\ActiveRecord
             'name' => 'Название',
             'preview' => 'Превью',
             'date' => 'Дата выхода книги',
+            'after_date' => 'по',
             'created_at' => 'Дата добавления',
             'updated_at' => 'Updated At',
             'author_id' => 'Автор',
