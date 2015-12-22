@@ -24,16 +24,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date')->widget(DatePicker::className(),
         [
-            'language' => 'us',
-            'name' => 'alarm_date',
-            //'dateFormat' =>Yii::$app->formatter->asDate('now', 'dd-MM-yyyy'),
+            'language' => 'ru',
+            'name' => 'date',
             'dateFormat' => 'php:d F Y',
         ]); ?>
 
     <?= $form->field($model, 'author_id')->dropDownList(ArrayHelper::map($author, 'id', 'last_name')) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -7,7 +7,7 @@ $config = [
     'name' => 'Тестовое задание на PHP YII2',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    //'language' => 'ru-RU',
+    'language' => 'ru-RU',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

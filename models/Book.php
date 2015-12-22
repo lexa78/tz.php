@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -20,6 +21,45 @@ use yii\behaviors\TimestampBehavior;
  */
 class Book extends \yii\db\ActiveRecord
 {
+    private static $monthes = [
+      'января' => 'January',
+      'январь' => 'January',
+      'февраля' => 'February',
+      'февраль' => 'February',
+      'марта' => 'March',
+      'март' => 'March',
+      'апреля' => 'April',
+      'апрель' => 'April',
+      'мая' => 'May',
+      'май' => 'May',
+      'июня' => 'June',
+      'июнь' => 'June',
+      'июля' => 'July',
+      'июль' => 'July',
+      'августа' => 'August',
+      'август' => 'August',
+      'сентября' => 'September',
+      'сентябрь' => 'September',
+      'ноября' => 'November',
+      'ноябрь' => 'November',
+      'октября' => 'October',
+      'октябрь' => 'October',
+      'декабря' => 'December',
+      'декабрь' => 'December',
+    ];
+
+    public static function getEnglishMonth($key) {
+        return self::$monthes[$key];
+    }
+
+    public static function getIntDate($strDate) {
+        $dateStringToArr = explode(' ', $strDate);
+        $dateStringToArr[1] = self::getEnglishMonth(strtolower($dateStringToArr[1]));
+        $strDate = implode(' ', $dateStringToArr);
+        $date = DateTime::createFromFormat('d F Y', $strDate);
+        return strtotime($date->format('d F Y'));
+    }
+
     public function behaviors()
     {
         return [

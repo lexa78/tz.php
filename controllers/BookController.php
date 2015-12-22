@@ -115,8 +115,7 @@ class BookController extends Controller
             $temp_var = explode(".", $image->name);
             $ext = end($temp_var);
 
-            $date = DateTime::createFromFormat('d F Y', $model->date);
-            $model->date = strtotime($date->format('d F Y'));
+            $model->date = Book::getIntDate($model->date);
 
             $model->preview = Yii::$app->security->generateRandomString() . ".{$ext}";
             $path = Yii::$app->params['uploadPath'] . $model->preview;
@@ -158,9 +157,7 @@ class BookController extends Controller
                 $image->saveAs($path);
             }
 
-            $date = DateTime::createFromFormat('d F Y', $model->date);
-            $model->date = strtotime($date->format('d F Y'));
-
+            $model->date = Book::getIntDate($model->date);
             $model->save();
 
             $session = Yii::$app->session;
@@ -168,7 +165,6 @@ class BookController extends Controller
                 $session->open();
             }
             $session->set('needSearchParam', true);
-//            var_dump($session->get('searchParam'));exit;
 
             return $this->redirect(['index']);
         } else {

@@ -1,9 +1,13 @@
 <?php
 
+use app\models\Author;
 use yii\bootstrap\Modal;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\jui\DatePicker;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -22,7 +26,7 @@ Modal::end();
 ?>
 
 <?php
-$this->title = 'Books';
+$this->title = 'Книги';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="book-index">
@@ -30,8 +34,46 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить книгу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Поиск</div>
+
+                    <div class="panel-body">
+                        <?php $form = ActiveForm::begin(['method' => 'get']); ?>
+
+                        <?= $form->field($searchModel, 'name'); ?>
+
+                        <?= $form->field($searchModel, 'author.last_name')->dropDownList(ArrayHelper::map(Author::find()->all(), 'last_name', 'last_name')); ?>
+
+                        <?= $form->field($searchModel, 'date')->widget(DatePicker::className(),
+                            [
+                                'language' => 'ru',
+                                'name' => 'date',
+                                'dateFormat' => 'php:d F Y',
+                            ]); ?>
+
+                        <?= $form->field($searchModel, 'after_date')->widget(DatePicker::className(),
+                            [
+                                'language' => 'ru',
+                                'name' => 'after_date',
+                                'dateFormat' => 'php:d F Y',
+                            ]); ?>
+
+                        <div class="form-group">
+                            <?= Html::submitButton('Искать', ['class' => 'btn btn-info']) ?>
+                        </div>
+
+                        <?php ActiveForm::end(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -54,7 +96,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'author.last_name',
-            'date:datetime',
+    //        'date:datetime',
+            ['attribute' => 'date',
+            'format' => ['date', 'php:d F Y']],
+
             'created_at:datetime',
             // 'updated_at',
             // 'author_id',

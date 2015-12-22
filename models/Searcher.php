@@ -18,7 +18,7 @@ class Searcher extends Book
     {
         // only fields in rules() are searchable
         return [
-            [['id', 'name', 'preview','date','created_at','author.last_name'], 'safe'],
+            [['name', 'preview','date','author.last_name', 'after_date'], 'safe'],
         ];
     }
 
@@ -36,10 +36,6 @@ class Searcher extends Book
 
     public function search($params)
     {
-//        echo '<pre>';
-//        print_r($params);
-//        exit;
-
         $query = Book::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -67,7 +63,8 @@ class Searcher extends Book
 
         // adjust the query by adding the filters
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'author.last_name', $this->getAttribute('author.last_name')]);
+            ->andFilterWhere(['like', 'author.last_name', $this->getAttribute('author.last_name')])
+            ->andFilterWhere(['between', 'date', Book::getIntDate($this->date), Book::getIntDate($this->after_date)]);
 
         return $dataProvider;
     }
